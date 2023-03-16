@@ -3,52 +3,58 @@ package prog2.exercise5.flight.booking.system;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class Main 
-{
-    public static void main( String[] args )
+public class Main {
+    public static void main(String[] args) 
     {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Please enter your full name: ");
-        String passengerFullName = input.nextLine();
-        System.out.println("Please enter your year of departure: ");
-        int dYear = input.nextInt();
-        System.out.println("Please enter your month of departure: ");
-        int dMonth = input.nextInt();
-        System.out.println("Please enter your day of departure: ");
-        int dDay = input.nextInt();
-        System.out.println("Please enter your year of return: ");
-        int rYear = input.nextInt();
-        System.out.println("Please enter your month of return: ");
-        int rMonth = input.nextInt();
-        System.out.println("Please enter your day of return: ");
-        int rDay = input.nextInt();
-        System.out.println("Please enter how many children tickets do you need: ");
-        int childPassengers = input.nextInt();
-        System.out.println("Please enter how many adult tickets do you need: ");
-        int adultPassengers = input.nextInt();
+        String depart = "2023-03-12";
+        LocalDate departDate = LocalDate.parse(depart);
+        String ret = "2023-03-14";
+        LocalDate returnDate = LocalDate.parse(ret);
 
+        String random = "FOF"+Math.random();
 
+        String substring = random.substring(random.length()-4);
 
+        String tripSource = "NANJING";
+        String sourceAirport = "NANJING LUKOU INTERNATIONAL AIRPORT";
+        String tripDestination = "OULU";
+        String destinationAirport = "OULU AIRPORT";
 
-        LocalDate departureDate =  LocalDate.of(dYear, dMonth, dDay);
-        LocalDate returnDate =  LocalDate.of(rYear, rMonth, rDay);
-        input.close();
+        FlightBooking fb = new FlightBooking("John Doe", departDate, returnDate, 1, 3);
+        int expResult = 4;
 
-        FlightBooking family1 = new FlightBooking(passengerFullName, departureDate, returnDate, childPassengers, adultPassengers);
+        fb.setTotalPassengers(1,3);
+        int result = fb.getTotalPassengers();
 
+        System.out.println("Please select the type of ride you want : ");
+        Scanner sc = new Scanner(System.in);
+        int engineRoom = sc.nextInt();
 
-        family1.setTripSource("1");
-        family1.setTripDestination("1", "2");
-        family1.setReturnDate(returnDate);
-        family1.setTripType("2");
-        family1.setBookingClass("1");
+        // fb.setPassengerFullName("John Doe");
+        // fb.setTicketNumber("MU759435");
+        // fb.setTripSource("NANJING") ;
+        // fb.setTripDestination("OULU");
+        // fb.setFlightCompany("Flights-of-Fancy");
+        // fb.setDepartingDate(LocalDate.parse("2023-03-12"));
+        // fb.setReturnDate(LocalDate.parse("2023-03-14"));
+        // fb.setTotalTicketPrice(5500);
 
-        family1.setDepartingTicketPrice(2, 5);
-        family1.setReturnTicketPrice();
+        // System.out.println("Dear " + fb.getPassengerFullName() + ".Thank you for booking your flight with ."
+                // + fb.getFlightCompany());
 
-        family1.setTotalTicketPrice();
+        System.out.println("Following are the details of your booking and the trip: ");
 
-        System.out.println(family1.StringOption1());
-        
+        System.out.println("Ticket Number: " + fb.getTicketNumber());
+
+        System.out.println("From " + fb.getTripSource() + " to " + fb.getTripDestination());
+
+        System.out.println("Date of departure: " + fb.getDepartingDate());
+
+        System.out.println("Date of return: " + fb.getReturnDate());
+
+        System.out.println("Total passengers: " + fb.getTotalPassengers());
+
+        System.out.println("Total ticket price in Euros: " + fb.getTotalTicketPrice());
+
     }
 }
